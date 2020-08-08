@@ -1,9 +1,13 @@
 module.exports = (sequelize, DataTypes) => {
     const Book = sequelize.define("books", {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true
+        },
         name: {
             type: DataTypes.STRING
         },
-        author:{
+        author: {
             type: DataTypes.STRING
         },
         publication: {
@@ -11,6 +15,15 @@ module.exports = (sequelize, DataTypes) => {
         },
         price: {
             type: DataTypes.INTEGER
+        },
+        edition:{
+            type: DataTypes.INTEGER
+        },
+        volume:{
+            type:DataTypes.INTEGER
+        },
+        no_of_copies:{
+            type:DataTypes.INTEGER
         }
     });
 

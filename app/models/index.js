@@ -20,10 +20,14 @@ db.Sequelize = Sequelize;
 //Define models
 db.books = require("./books.model.js")(sequelize, Sequelize);
 db.users = require("./users.model.js")(sequelize, Sequelize);
+db.book_transactions = require("./book_transaction.model.js")(sequelize, Sequelize);
 //Define relations of tables
-db.users.hasMany(db.books, { as: "books" });
-db.books.belongsTo(db.users, {
+db.book_transactions.belongsTo(db.users, {
   foreignKey: "userId",
   as: "user",
+});
+db.book_transactions.belongsTo(db.books, {
+  foreignKey: "bookId",
+  as: "book",
 });
 module.exports = db;
