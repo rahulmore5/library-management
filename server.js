@@ -18,9 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //sync with db
 db.sequelize.sync();
 // simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to library application." });
-});
+require("./app/routes/library.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

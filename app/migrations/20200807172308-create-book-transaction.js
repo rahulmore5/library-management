@@ -16,13 +16,25 @@ module.exports = {
           primaryKey: true,
           autoIncrement: true
         },
+        userId: {
+          type: Sequelize.INTEGER
+        },
+        bookId: {
+          type: Sequelize.INTEGER
+        },
+        createdAt: {
+          type: Sequelize.DATE
+        },
+        updatedAt: {
+          type: Sequelize.DATE
+        },
         date_of_return: {
           type: Sequelize.DATE
         },
         date_of_issue: {
           type: Sequelize.DATE
         },
-        type: {
+        transaction_type: {
           type: Sequelize.ENUM('issue', 'return')
         }
       })
