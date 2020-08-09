@@ -29,7 +29,7 @@ exports.createUser = (req, res, next) => {
             res.status(500).json({
                 code: 500,
                 message:
-                    err.message || "Some error occurred while creating the user."
+                    err.message || "Some error occurred."
             });
         });
 };
@@ -55,7 +55,7 @@ exports.createBook = (req, res, next) => {
             res.status(500).json({
                 code: 500,
                 message:
-                    err.message || "Some error occurred while creating the user."
+                    err.message || "Some error occurred."
             });
         });
 };
@@ -71,7 +71,7 @@ exports.findAllUsers = (req, res) => {
             res.status(500).json({
                 code: 500,
                 message:
-                    err.message || "Some error occurred while retrieving tutorials."
+                    err.message || "Some error occurred."
             });
         });
 };
@@ -87,7 +87,7 @@ exports.findAllBooks = (req, res) => {
             res.status(500).json({
                 code: 500,
                 message:
-                    err.message || "Some error occurred while retrieving tutorials."
+                    err.message || "Some error occurred."
             });
         });
 };
@@ -117,7 +117,7 @@ exports.issueBook = (req, res, next) => {
             res.status(500).json({
                 code: 500,
                 message:
-                    err.message || "Some error occurred while creating the user."
+                    err.message || "Some error occurred."
             });
         });
 }
@@ -148,7 +148,7 @@ exports.returnBook = (req, res, next) => {
             res.status(500).json({
                 code: 500,
                 message:
-                    err.message || "Some error occurred while creating the user."
+                    err.message || "Some error occurred."
             });
         });
 }
