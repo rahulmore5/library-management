@@ -1,7 +1,7 @@
 # library-management
 This is used for management of user and books of library.
 
-#Prerequisites
+# Prerequisites
 1. Node JS 10+
 2. MySQL
 3. Angular 8
