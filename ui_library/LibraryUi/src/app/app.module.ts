@@ -10,13 +10,17 @@ import { UserListComponent } from './components/user-list/user-list.component';
 import { IssueBooksComponent } from './components/issue-books/issue-books.component';
 import { IssueBooksListComponent } from './components/issue-books-list/issue-books-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AddUserComponent } from './components/add-user/add-user.component';
+import { AddBookComponent } from './components/add-book/add-book.component';
 @NgModule({
   declarations: [
     AppComponent,
     BookListComponent,
     UserListComponent,
     IssueBooksComponent,
-    IssueBooksListComponent
+    IssueBooksListComponent,
+    AddUserComponent,
+    AddBookComponent
   ],
   imports: [
     BrowserModule,

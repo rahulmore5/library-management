@@ -1,21 +1,32 @@
 <div class="list row">
   <div class="col-lg-6 col-md-6">
-    <h4>Books List</h4>
-    <table>
-      <tr>
-        <th>Book Name</th>
-        <th>Book Author</th>
-        <th>Book Publication</th>
-        <th>Price</th>
-      </tr>
-      <tr *ngFor="let book of books; let i = index" [class.highlight]="i == currentIndex"
-      (click)="setActiveBook(book, i)">
-        <td>{{ book.name }}</td>
-        <td>{{ book.author }}</td>
-        <td>{{ book.publication }}</td>
-        <td>{{ book.price }}</td>
-      </tr>
-    </table>
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Book List</h4>
+      </div>
+      <div class="col-md-6">
+        <button (click)="addBook()" class="btn btn-success">Add Book</button>
+      </div>
+    </div><br><br>
+    <div class="row">
+      <div class="col-md-12">
+        <table>
+          <tr>
+            <th>Book Name</th>
+            <th>Book Author</th>
+            <th>Book Publication</th>
+            <th>Price</th>
+          </tr>
+          <tr *ngFor="let book of books; let i = index" [class.highlight]="i == currentIndex"
+            (click)="setActiveBook(book, i)">
+            <td>{{ book.name }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.publication }}</td>
+            <td>{{ book.price }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
   </div>
   <div class="col-md-6">
     <div *ngIf="currentBook">
