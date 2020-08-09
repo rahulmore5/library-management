@@ -5,6 +5,7 @@ const Book_transactions = db.book_transactions;
 const Op = db.Sequelize.Op;
 const QueryTypes = db.sequelize.QueryTypes;
 const Sequelize = db.sequelize;
+var moment = require('moment');
 /** 
 *  Create and Save a new User
 */
@@ -155,42 +156,40 @@ exports.returnBook = (req, res, next) => {
  * Get book history based on condition
  */
 exports.bookHistory = (req, res, next) => {
-    // Validate request
-    if (!req.body && !req.body.fromDate && !req.body.toDate) {
-        res.status(400).json({
-            code: 400,
-            message: "Invalid inputs!"
-        });
-        return;
-    }
     var query = {};
+    let fromDate = "";
+    let toDate = "";
     if (req.body.fromDate !== undefined && req.body.toDate !== undefined) {
-        let fromDate = req.body.fromDate + "T00:00:00.000Z";
-        let toDate = req.body.toDate + "T23:59:59.999Z";
+        fromDate = req.body.fromDate + "T00:00:00.000Z";
+        toDate = req.body.toDate + "T23:59:59.999Z";
         if (req.body.book_type == 0) {
-            query = "SELECT * FROM `book_transactions` WHERE date_of_issue BETWEEN '" + fromDate + "' AND '" + toDate + "';"
+            query = "SELECT book_transactions.*,concat(users.firstname,' ',users.lastname) as username, books.name as bookname FROM `book_transactions`,users,books WHERE date_of_issue BETWEEN '" + fromDate + "' AND '" + toDate + "' and book_transactions.userId=users.id and book_transactions.bookId=books.id;"
         } else if (req.body.book_type == 1) {
-            query = "SELECT * FROM `book_transactions` WHERE date_of_return BETWEEN '" + fromDate + "' AND '" + toDate + "';"
+            query = "SELECT book_transactions.*,concat(users.firstname,' ',users.lastname) as username, books.name as bookname FROM `book_transactions`,users,books WHERE date_of_return BETWEEN '" + fromDate + "' AND '" + toDate + "' and book_transactions.userId=users.id and book_transactions.bookId=books.id;"
         } else {
-            query = "SELECT * FROM `book_transactions` WHERE createdAt BETWEEN '" + fromDate + "' AND '" + toDate + "';"
+            query = "SELECT book_transactions.*,concat(users.firstname,' ',users.lastname) as username, books.name as bookname FROM `book_transactions`,users,books WHERE book_transactions.createdAt BETWEEN '" + fromDate + "' AND '" + toDate + "' and book_transactions.userId=users.id and book_transactions.bookId=books.id;"
         }
-        console.log("query=", query);
-        // Get details from the database
-        Sequelize.query(query, { type: QueryTypes.SELECT })
-            .then(data => {
-                res.status(200).json({ code: 200, data: data });
-            })
-            .catch(err => {
-                res.status(500).json({
-                    code: 500,
-                    message:
-                        err.message || "Some error occurred while creating the user."
-                });
-            });
+
     } else {
-        res.status(400).json({
-            code: 400,
-            message: "Invalid inputs!"
-        });
+        query = "SELECT book_transactions.*,concat(users.firstname,' ',users.lastname) as username, books.name as bookname FROM `book_transactions`,users,books WHERE book_transactions.userId=users.id and book_transactions.bookId=books.id;";
     }
+    console.log("query=", query);
+    // Get details from the database
+    Sequelize.query(query, { type: QueryTypes.SELECT })
+        .then(data => {
+            data.forEach(element => {
+                element.createdAt = element.createdAt ? moment(element.createdAt).format('DD/MM/YYYY hh:mm a') : 'NA';
+                element.updatedAt = element.updatedAt ? moment(element.updatedAt).format('DD/MM/YYYY hh:mm a') : 'NA';
+                element.date_of_return = element.date_of_return ? moment(element.date_of_return).format('DD/MM/YYYY hh:mm a') : 'NA';
+                element.date_of_issue = element.date_of_issue ? moment(element.date_of_issue).format('DD/MM/YYYY hh:mm a') : 'NA';
+            });
+            res.status(200).json({ code: 200, data: data });
+        })
+        .catch(err => {
+            res.status(500).json({
+                code: 500,
+                message:
+                    err.message || "Some error occurred while creating the user."
+            });
+        });
 }
