@@ -13,8 +13,8 @@ After installing MySQL Please follow steps:
     For Windows Machine need to create database `librarydb_dev` manually if not generated automated.
     
 
-# For Run the project
-1. Open terminal and go to project directory where saved in local machine.Enter command as `npm run start` in terminal for starting backend rest services.
+# For running the project
+1. Open terminal and go to project directory.Enter command as `npm run start` in terminal for starting backend rest API services.
 2. Backend service runs on `localhost:8080` url and port.
 2. For running front end follow below steps:
     1. Open terminal and go to project directory.
